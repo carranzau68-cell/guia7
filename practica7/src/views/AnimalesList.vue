@@ -36,7 +36,7 @@ export default {
     }
   },
   beforeCreate(){
-    alert('Inicia la creación del componente')
+    console.log('Inicia la creación del componente')
   },
   created(){
     console.log('Componente creado')
@@ -44,24 +44,25 @@ export default {
     guardados.forEach(a => this.animales.push(a))
   },
   beforeMount(){
-    alert('El componente está cerca de renderizar')
+    console.log('El componente está cerca de renderizar')
   },
   mounted(){
     console.log('El componente se ha renderizado')
-    const btnAdd = document.getElementById('btnAdd')
-    if (btnAdd) btnAdd.addEventListener('click', this.agregarAnimal)
+    this._btnAdd = document.getElementById('btnAdd')
+    if (this._btnAdd) this._btnAdd.addEventListener('click', this.agregarAnimal)
   },
   beforeUpdate(){
-    alert('El componente ha sufrido un cambio en las propiedades o estado')
+    console.log('Cambió el estado/props (beforeUpdate)')
   },
   updated(){
-    console.log('El componente se ha actualizado y el DOM ha sido modificado')
+    console.log('DOM actualizado (updated)')
   },
   beforeUnmount(){
-    alert('El componente iniciará a desmontarse')
+    if (this._btnAdd) this._btnAdd.removeEventListener('click', this.agregarAnimal)
+    console.log('Se va a desmontar (beforeUnmount)')
   },
   unmounted(){
-    console.log('El componente ha sido desmontado')
+    console.log('Se desmontó (unmounted)')
   }
 }
 </script>
